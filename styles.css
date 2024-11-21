@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест для Рудої Вікторії Олександрівни</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fbc2eb, #a18cd1);
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #7b4397;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        main {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #7b4397;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #5e3373;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .result {
+            font-size: 1.5em;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Головна сторінка -->
+    <header>
+        <h1>Тест для Рудої Вікторії Олександрівни</h1>
+    </header>
+    <main id="main-content">
+        <h2>Вітаємо, Вікторіє!</h2>
+        <p>Цей тест покаже, яка ти насправді 😉</p>
+        <button class="button" onclick="startTest()">Почати тест</button>
+    </main>
+
+    <script>
+        const questions = [
+            { question: "Який твій улюблений колір?", options: ["Червоний", "Синій", "Зелений", "Жовтий"] },
+            { question: "Який десерт ти обираєш?", options: ["Торт", "Морозиво", "Печиво", "Фрукти"] },
+            { question: "Що ти робиш у вільний час?", options: ["Читаю", "Слухаю музику", "Гуляю", "Дивлюсь фільми"] },
+            { question: "Який фільм ти обереш?", options: ["Комедія", "Драма", "Екшн", "Фантастика"] },
+            { question: "Який стиль одягу тобі подобається?", options: ["Класичний", "Кежуал", "Спортивний", "Вінтаж"] },
+            { question: "Твоя улюблена пора року?", options: ["Весна", "Літо", "Осінь", "Зима"] },
+            { question: "Який напій ти любиш?", options: ["Кава", "Чай", "Сік", "Вода"] },
+            { question: "Що б ти зробила на безлюдному острові?", options: ["Будувала хижу", "Шукала їжу", "Плавала", "Спала"] },
+            { question: "Яке свято тобі найбільше подобається?", options: ["Новий рік", "День народження", "Великдень", "Різдво"] },
+            { question: "Що тебе мотивує?", options: ["Сім'я", "Мета", "Друзі", "Нагорода"] }
+        ];
+        let currentQuestion = 0;
+        let answers = [];
+
+        function startTest() {
+            document.getElementById('main-content').innerHTML = `
+                <div class="question">
+                    <h2>${questions[currentQuestion].question}</h2>
+                    ${questions[currentQuestion].options.map((option, index) => `
+                        <button class="button" onclick="chooseAnswer(${index})">${option}</button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function chooseAnswer(answerIndex) {
+            answers.push(answerIndex);
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                startTest();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const resultIndex = answers.reduce((a, b) => a + b, 0) % 4; // Проста формула для вибору результату
+            const results = [
+                "Ти людина творчості та натхнення! 🎨",
+                "Ти енергійна та любиш пригоди! 🌟",
+                "Ти мудра та обдумуєш кожен крок. 📚",
+                "Ти душа компанії та завжди приносиш радість! 🎉"
+            ];
+            document.getElementById('main-content').innerHTML = `
+                <div class="result">
+                    <h2>Твій результат:</h2>
+                    <p>${results[resultIndex]}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
